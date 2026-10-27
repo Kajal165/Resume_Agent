@@ -39,7 +39,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 load_dotenv()
 
 # .env file se Groq API key read kar rahe hain
-groq_api_key = os.getenv("GROQ_API_KEY")
+groq_api_key = st.secret("GROQ_API_KEY")
 
 # Check kar rahe hain ki API key available hai ya nahi
 if not groq_api_key:
@@ -49,8 +49,8 @@ if not groq_api_key:
 
 # Groq LLM initialize kar rahe hain
 llm = ChatGroq(
-    model="openai/gpt-oss-120b",  # Kaunsa language model use hoga
-    api_key=groq_api_key,         # API key se Groq ko authenticate karenge
+    model=st.secrets["LLM_MODEL"],  # Kaunsa language model use hoga
+    api_key=st.secrets["GROQ_API_KEY"],         # API key se Groq ko authenticate karenge
     temperature=0                 # 0 rakhne se answers comparatively consistent hote hain
 )
 
